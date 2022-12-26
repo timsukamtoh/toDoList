@@ -1,0 +1,176 @@
+/*font*/
+@font-face {
+    font-family: jack-input;
+    src: url('./fonts/JAi_____.TTF');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: arinoe;
+    src: url('./fonts/Arinoe.ttf');
+    font-weight: 800;
+    font-style: normal;
+}
+/*general*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: jack-input;
+}
+body{
+    background-color: whitesmoke;
+    word-wrap: break-word;
+    position: relative;
+    min-height: 100vh;
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+}
+h1,h2,h3{
+    font-family: arinoe;
+}
+.btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: whitesmoke;
+    font-size: large;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    gap: 8px;
+}
+.side{
+    background-color: peachpuff;
+}
+.btn:hover{
+    filter: brightness(90%);
+}
+.btn.green{
+    background-color: lightgreen;
+    width: 100%;
+}
+.btn.red{
+    background-color: lightcoral;
+    width: 100%;
+}
+.input{
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: large;
+}
+.close-btn{
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-image: url('./icons/close-circle-outline.png');
+    background-size: 20px;
+    background-color: peachpuff;
+}
+
+/*header*/
+.header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: x-large;
+    padding: 20px 60px;
+    color: white;
+    background-color: royalblue;
+}
+.label{
+    display: flex;
+    align-items: center;
+    font-size: larger;
+    gap: 10px;
+}
+.logo{
+    max-width: 60px;
+}
+.icon{
+    max-width: 20px;
+}
+
+/*main*/
+.main{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 20px;
+}
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: rgb(0, 0, 0);
+    font-size: x-large;
+    background-color: peachpuff;
+    height: 85vh;
+    gap: 10px;
+    padding: 15px;
+}
+.task-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 25px;
+    gap: 15px;
+    font-size: x-large;
+}
+.add-task-form{
+    display: flex;
+    flex-direction: column;
+    background-color: peachpuff;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 10px;
+    width: 38vw;
+    min-width: 200px;
+}
+.textarea{
+    max-width: 36vw;
+}
+.form-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.prio-group{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 20vw;
+    gap: 10px;
+}
+.task{
+    display: grid;
+    grid-template-columns: 0.5fr 7fr 1fr 0.5fr 0.5fr;
+    align-items: center;
+    font-size: large;
+    gap: 10px;
+    padding: 10px;
+    background-color: peachpuff;
+    border-radius: 10px;
+    
+}
+
+/*footer*/
+.footer{
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: royalblue;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 20px;
+    font-weight: bold;
+}
+
+
+

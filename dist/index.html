@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="label">
+                <img src="../src/icons/setting.png" class="logo">
+                <h1>ToDo List</h1>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="sidebar">
+            <button class="side btn" id="taskBtn"><img src="../src/icons/calendar-check.png" class="icon">All Tasks</button>
+            <button class="side btn" id="todayBtn"><img src="../src/icons/calendar-today.png" class="icon">Today</button>
+            <button class="side btn" id="weekBtn"><img src="../src/icons/calendar-week.png" class="icon">This Week</button>
+            <h2>Projects</h2>
+            <div class="project-grid" id="projectGrid">
+                <button class="side btn" id="addProjBtn"><img src="../src/icons/plus.png" class="icon">Add Project</button>
+            </div>
+        </div>
+        <div class="task-section">
+            <h3 class="title">All Tasks</h3>
+            <div class="task-grid" id="taskGrid">
+                <div class="task">
+                    <input type="checkbox" id="task1done">
+                    <div>Do the Laundry</div>
+                    <div>12/27/2022</div>
+                    <button><img src="../src/icons/plus.png" class="icon"></button>
+                    <button><img src="../src/icons/plus.png" class="icon"></button>
+                </div>
+                <button class="btn" id="addTaskBtn"><img src="../src/icons/plus.png" class="icon">Add Task</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">Copyright<p>&copy;</p>2022 timtoh168</footer>
+    <script defer src="./main.js"></script>
+</body>
+</html>
