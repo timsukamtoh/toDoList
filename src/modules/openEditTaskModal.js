@@ -2,10 +2,9 @@ import closeAddTaskModal from './closeAddTaskModal'
 import createTask from './createTask'
 import createTaskContainer from './createTaskContainer'
 
-function openAddTaskModal(project,allTasksProj,elementSpot){
+function openEditTaskModal(task,project,allTasksProj,elementSpot){
     const taskGrid = document.getElementById('taskGrid')
     const addTaskBtn = document.getElementById('addTaskBtn')
-    addTaskBtn.classList.add('disabled')
     
     const addTaskForm = document.createElement('form')
     addTaskForm.classList.add('add-task-form')
@@ -19,13 +18,14 @@ function openAddTaskModal(project,allTasksProj,elementSpot){
     title.type='text'
     title.id='title'
     title.name='title'
-    title.placeholder='Title'
+    title.value=task.title
     title.required=true
     const date = document.createElement('input')
     date.classList.add('input')
     date.type='date'
     date.id='date'
     date.name='date'
+    date.value=task.date
     date.required=true
     const closeBtn = document.createElement('button')
     closeBtn.classList.add('close-btn')
@@ -37,7 +37,7 @@ function openAddTaskModal(project,allTasksProj,elementSpot){
     description.classList.add('textarea','input')
     description.name='description'
     description.id='description'
-    description.placeholder='e.g. make sure to use bleach for laundry'
+    description.value=task.description
     description.rows=4
     description.cols=70
     
@@ -88,6 +88,7 @@ function openAddTaskModal(project,allTasksProj,elementSpot){
     taskGrid.insertBefore(addTaskForm,elementSpot)
     
     closeBtn.addEventListener('click',()=>{
+        taskGrid.insertBefore(createTaskContainer(task,project),addTaskForm)
         closeAddTaskModal(project)
     })
     confirmBtn.addEventListener('click',(e)=>{
@@ -97,11 +98,12 @@ function openAddTaskModal(project,allTasksProj,elementSpot){
         if(addTaskForm.reportValidity()){
             e.preventDefault()
             let currentTask = createTask()
-            project.insert(currentTask, Array.prototype.indexOf.call(taskGrid.children,addTaskForm))
+            project.insert(currentTask, Array.prototype.indexOf.call(taskGrid.children, addTaskForm))
             taskGrid.insertBefore(createTaskContainer(currentTask,project), addTaskForm)
             closeAddTaskModal(project)
         }
     })
+    addTaskBtn.classList.add('disabled')
 }
 
-export default openAddTaskModal;
+export default openEditTaskModal;

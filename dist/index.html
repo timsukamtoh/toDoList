@@ -17,7 +17,7 @@
     </header>
     <div class="main">
         <div class="sidebar">
-            <button class="side btn" id="taskBtn"><img src="../src/icons/calendar-check.png" class="icon">All Tasks</button>
+            <button class="side btn" id="allBtn"><img src="../src/icons/calendar-check.png" class="icon">All Tasks</button>
             <button class="side btn" id="todayBtn"><img src="../src/icons/calendar-today.png" class="icon">Today</button>
             <button class="side btn" id="weekBtn"><img src="../src/icons/calendar-week.png" class="icon">This Week</button>
             <h2>Projects</h2>
@@ -26,15 +26,8 @@
             </div>
         </div>
         <div class="task-section">
-            <h3 class="title">All Tasks</h3>
+            <h3 class="title" id="taskTitle"></h3>
             <div class="task-grid" id="taskGrid">
-                <div class="task">
-                    <input type="checkbox" id="task1done">
-                    <div>Do the Laundry</div>
-                    <div>12/27/2022</div>
-                    <button><img src="../src/icons/plus.png" class="icon"></button>
-                    <button><img src="../src/icons/plus.png" class="icon"></button>
-                </div>
                 <button class="btn" id="addTaskBtn"><img src="../src/icons/plus.png" class="icon">Add Task</button>
             </div>
         </div>

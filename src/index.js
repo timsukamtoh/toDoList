@@ -1,31 +1,56 @@
 import './style.css';
+import {
+    isToday,
+    toDate,
+    isThisWeek,
+    isBefore,
+    endOfToday,
+    add,
+    format,
+  } from "date-fns";
 import Project from './modules/projectClass'
 import Task from './modules/taskClass'
-import { add } from 'date-fns'
-import openAddTaskModal from './modules/openAddTaskModal'
-import closeAddTaskModal from './modules/closeAddTaskModal'
-// import createTask from './modules/createTask'
+import refreshTaskGrid from './modules/refreshTaskGrid'
+import openAddTaskModal from './modules/openAddTaskModal';
 
-let allProjects = [];
-let allTasks = new Project(allTasks,[])
-allProjects.push(allTasks)
+const _init = (() => {
 
-const addTaskBtn = document.getElementById('addTaskBtn')
-const closeTaskBtn = document.createElement('button')
-const addTaskForm = document.createElement('form')
-const confirmBtn = document.createElement('button')
+    let allProjects = [];
+    let allTasks = new Project('All Tasks',Array())
+    let defaultTask = new Task('do laundry','2022-12-30','','high')
+    let currentProject = allTasks
+    allTasks.insert(defaultTask,0)
+    allProjects.push(allTasks)
 
-addTaskBtn.addEventListener('click',()=>{
-    openAddTaskModal(addTaskForm,confirmBtn,closeTaskBtn)
-    console.log('test')
-})
+    const taskGrid = document.getElementById('taskGrid')
+    const allBtn = document.getElementById('allBtn')
+    const todayBtn = document.getElementById('todayBtn')
+    const weekBtn = document.getElementById('weekBtn')
+    const addTaskBtn = document.getElementById('addTaskBtn')
 
-closeTaskBtn.addEventListener('click',()=>{
-    closeAddTaskModal(addTaskForm,addTaskBtn)
-})
-
-// confirmBtn.addEventListener('click',()=>{
-//     let currentTask = createTask()
-//     allTasks.push(currentTask)
+    refreshTaskGrid(currentProject,allTasks)
+    taskGrid.append(addTaskBtn)
     
-// })
+    allBtn.addEventListener('click',()=>{
+        currentProject = allTasks
+        refreshTaskGrid(currentProject,allTasks)
+        taskGrid.append(addTaskBtn)
+    })
+
+    todayBtn.addEventListener('click',()=>{
+        let todayTasks = new Project("Today's Tasks",allTasks.filterToday())
+        currentProject = todayTasks
+        refreshTaskGrid(currentProject,allTasks)
+        taskGrid.append(addTaskBtn)
+    })
+    weekBtn.addEventListener('click',()=>{
+        let weekTasks = new Project("This Week's Tasks",allTasks.filterWeek())
+        currentProject = weekTasks
+        refreshTaskGrid(currentProject,allTasks)
+        taskGrid.append(addTaskBtn)
+    })
+
+    addTaskBtn.addEventListener('click',()=>{
+        openAddTaskModal(currentProject,allTasks,addTaskBtn)
+    })
+})();

@@ -5,9 +5,7 @@ class Task {
         this.description = description;
         this.priority = priority;
     }
-    isPartOfProj(project) { 
-        return project 
-    }
+    
 }
 
 export default Task;
