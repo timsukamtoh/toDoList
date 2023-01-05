@@ -1,19 +1,13 @@
 import {
     isToday,
-    toDate,
-    formatISO,
     isThisWeek,
-    isBefore,
-    endOfToday,
-    add,
-    format,
     parseISO,
 } from "date-fns";
-import Task from './taskClass'
 class Project {
-    constructor(title,taskList) { 
+    constructor(title,taskList,currentProject) { 
         this.title = title; 
         this.taskList = taskList;
+        this.currentProject = currentProject
     }
     add(task){
         this.taskList.push(task)
@@ -24,9 +18,6 @@ class Project {
     remove(task){
         this.taskList = this.taskList.filter(eachTask => eachTask!=task);
     }
-    combine(project){
-        this.taskList = this.taskList.concat(project.getTaskList())
-    }
     filterToday(){
         let todayTasks = Array()
         todayTasks = this.taskList.filter(task => isToday(parseISO(task.date)))
@@ -36,6 +27,17 @@ class Project {
         let weekTasks = Array()
         weekTasks = this.taskList.filter(task => isThisWeek(parseISO(task.date)))
         return weekTasks
+    }
+    changeCurrentProject(project){
+        this.currentProject = project
+    }
+    removeProjectTasks(project){
+        project.getTaskList().forEach(task => {
+            this.remove(task)
+        });
+    }
+    getItem(projectTitle){
+        return this.taskList.find(project => project.title==projectTitle)
     }
     getTaskList(){
         return this.taskList;

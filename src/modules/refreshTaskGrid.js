@@ -1,12 +1,12 @@
-import Project from './projectClass'
 import createTaskContainer from './createTaskContainer'
-import openAddTaskModal from './openAddTaskModal'
 
-function refreshTaskGrid(project,allTasksProj){
+function refreshTaskGrid(allProjects){
     const taskGrid = document.getElementById('taskGrid')
-    const taskTitle = document.getElementById('taskTitle')
+    const projHeader = document.getElementById('projHeader')
+    const addTaskBtn = document.getElementById('addTaskBtn')
 
-    taskTitle.textContent = project.title
+    let project = allProjects.currentProject
+    projHeader.textContent = project.title
     // clears taskGrid
     while(taskGrid.firstChild){
         taskGrid.removeChild(taskGrid.firstChild)
@@ -15,9 +15,11 @@ function refreshTaskGrid(project,allTasksProj){
     //fills taskGrid
     if(project.taskList.length > 0){
         project.getTaskList().forEach(task => {
-            taskGrid.appendChild(createTaskContainer(task,project,allTasksProj))
+            taskGrid.appendChild(createTaskContainer(task,allProjects))
         })
     }
+    addTaskBtn.classList.remove('disabled')
+    taskGrid.append(addTaskBtn)
 }
 
 export default refreshTaskGrid

@@ -1,6 +1,6 @@
-import openEditTaskModal from './openEditTaskModal'
+import openTaskModal from './openTaskModal'
 
-function createTaskContainer(task,project,allTasksProj){
+function createTaskContainer(task,allProjects){
     const taskGrid = document.getElementById('taskGrid')
 
     const taskContainer = document.createElement('div')
@@ -18,6 +18,8 @@ function createTaskContainer(task,project,allTasksProj){
 
     taskContainer.append(checkbox,taskTitle,taskDate,editBtn,deleteBtn)
 
+    let project = allProjects.currentProject
+    let allTasksProj = allProjects.getItem('All Tasks')
     checkbox.addEventListener('click',()=>{
         if(checkbox.checked){
             checkbox.nextElementSibling.classList.add('completed')
@@ -29,16 +31,16 @@ function createTaskContainer(task,project,allTasksProj){
     })
 
     editBtn.addEventListener('click',()=>{
-        openEditTaskModal(task,project,allTasksProj,taskContainer)
+        openTaskModal(allProjects,task,taskContainer)
         taskGrid.removeChild(taskContainer)
     })
     deleteBtn.addEventListener('click',()=>{
         project.remove(task)
         taskGrid.removeChild(taskContainer)
+        if(project!=allTasksProj){
+            allTasksProj.remove(task)
+        }
     })
-
-
-
     return taskContainer
 }
 

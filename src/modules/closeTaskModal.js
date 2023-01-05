@@ -1,4 +1,4 @@
-function closeAddTaskModal(project){
+function closeTaskModal(){
     const taskGrid = document.getElementById('taskGrid')
     const addTaskForm = document.getElementById('addTaskForm')
     const addTaskBtn = document.getElementById('addTaskBtn')
@@ -6,7 +6,6 @@ function closeAddTaskModal(project){
     addTaskForm.innerHTML=''
     taskGrid.removeChild(addTaskForm)
     addTaskBtn.classList.remove('disabled')
-    console.log(project.getTaskList())
 }
 
-export default closeAddTaskModal;
+export default closeTaskModal;
