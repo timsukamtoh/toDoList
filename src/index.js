@@ -2,18 +2,19 @@ import './style.css';
 import Project from './modules/projectClass'
 import Task from './modules/taskClass'
 import refreshTaskGrid from './modules/refreshTaskGrid'
+import refreshProjectGrid from './modules/refreshProjectGrid'
 import openProjModal from './modules/openProjModal'
 import openTaskModal from './modules/openTaskModal';
+import saveProject from './modules/saveProject';
+import loadProjects from './modules/loadProjects'
 
 const _init = (() => {
 
-    let allTasks = new Project('All Tasks',Array())
-    let allProjects = new Project('All Projects',Array(),allTasks)
-    let defaultTask = new Task('do laundry','2022-12-30','','high')
-    allTasks.insert(defaultTask,0)
-    allProjects.add(allTasks)
+    let allProjects = loadProjects()
+    refreshProjectGrid(allProjects)
+    saveProject(allProjects)
+    let allTasks = allProjects.taskList[0]
 
-    const taskGrid = document.getElementById('taskGrid')
     const allBtn = document.getElementById('allBtn')
     const todayBtn = document.getElementById('todayBtn')
     const weekBtn = document.getElementById('weekBtn')

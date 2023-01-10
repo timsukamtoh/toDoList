@@ -155,20 +155,32 @@ h1,h2,h3{
 ::-webkit-scrollbar-thumb:hover {
     background: royalblue;
 } 
+.error{
+    display: none;
+    color: red;
+    font-size: medium;
+    font-family: jack-input;
+    padding: 0px 10px;
+}
+.error.active{
+    display: block;
+}
 .project-grid{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    height: 50vh;
+    height: 45vh;
     overflow-y: scroll;
-    width: 18vw;
+    width: 100%;
     
 }
 #addProjectForm{
     display: grid;
     grid-template: 1fr 1fr / 1fr 1fr;
+    width: 94%;
     gap: 8px;
+    margin-left: 4px;
     align-items: center;
     justify-content: space-between;
 }
@@ -191,7 +203,8 @@ h1,h2,h3{
     background-color: peachpuff;
     border-radius: 10px;
     padding-right: 10px;
-    margin-right: 4px;
+    margin-left: 4px;
+    width: 94%;
 }
 .project-container:hover{
     filter: brightness(90%);

@@ -1,4 +1,5 @@
 import refreshTaskGrid from './refreshTaskGrid'
+import saveProject from './saveProject'
 function createProjContainer(project,allProjects){
     const projectGrid = document.getElementById('projectGrid')
 
@@ -22,11 +23,14 @@ function createProjContainer(project,allProjects){
         refreshTaskGrid(allProjects)
     })
     deleteBtn.addEventListener('click', ()=>{
-        allTasksProj.removeProjectTasks(project)
+        project.taskList.forEach(task => {
+            allTasksProj.remove(task)
+            project.remove(task)
+        });
         allProjects.changeCurrentProject(allTasksProj)
         refreshTaskGrid(allProjects)
-
         allProjects.remove(project)
+        saveProject(allProjects)
         projectGrid.removeChild(projectContainer)
     })
     return projectContainer

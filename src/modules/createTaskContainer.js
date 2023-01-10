@@ -1,4 +1,5 @@
 import openTaskModal from './openTaskModal'
+import saveProject from './saveProject'
 
 function createTaskContainer(task,allProjects){
     const taskGrid = document.getElementById('taskGrid')
@@ -35,11 +36,18 @@ function createTaskContainer(task,allProjects){
         taskGrid.removeChild(taskContainer)
     })
     deleteBtn.addEventListener('click',()=>{
-        project.remove(task)
-        taskGrid.removeChild(taskContainer)
+        if(project.title != task.project){
+            let prevProject = allProjects.getItem(task.project)
+            prevProject.remove(task)
+            saveProject(prevProject)
+        }
         if(project!=allTasksProj){
             allTasksProj.remove(task)
+            saveProject(allTasksProj)
         }
+        project.remove(task)
+        saveProject(project)
+        taskGrid.removeChild(taskContainer)
     })
     return taskContainer
 }

@@ -2,7 +2,7 @@ import {
     isToday,
     isThisWeek,
     parseISO,
-} from "date-fns";
+} from 'date-fns';
 class Project {
     constructor(title,taskList,currentProject) { 
         this.title = title; 
@@ -30,11 +30,6 @@ class Project {
     }
     changeCurrentProject(project){
         this.currentProject = project
-    }
-    removeProjectTasks(project){
-        project.getTaskList().forEach(task => {
-            this.remove(task)
-        });
     }
     getItem(projectTitle){
         return this.taskList.find(project => project.title==projectTitle)

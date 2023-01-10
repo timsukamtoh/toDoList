@@ -1,10 +1,12 @@
 import Project from './projectClass'
 import closeProjModal from './closeProjModal'
 import createProjContainer from './createProjContainer'
+import saveProject from './saveProject'
 
 function openProjModal(allProjects){
     const projectGrid = document.getElementById('projectGrid')
     const addProjBtn = document.getElementById('addProjBtn')
+    const projectError = document.getElementById('projectError')
     addProjBtn.classList.add('disabled')
 
     const addProjectForm = document.createElement('form')
@@ -33,15 +35,22 @@ function openProjModal(allProjects){
     projectGrid.append(addProjBtn)
 
     cancelProjBtn.addEventListener('click',()=>{
-        closeProjModal(allProjects)
+        closeProjModal()
+        projectError.classList.remove('active')
     })
     confirmProjBtn.addEventListener('click',(e)=>{
         if(addProjectForm.reportValidity()){
             e.preventDefault()
-            let newProj = new Project(projTitle.value, new Array())
-            allProjects.add(newProj)
-            projectGrid.insertBefore(createProjContainer(newProj,allProjects),addProjBtn)
-            closeProjModal(allProjects)
+            if(allProjects.getItem(projTitle.value)){
+                projectError.classList.add('active')
+            } else {
+                let newProj = new Project(projTitle.value, new Array())
+                allProjects.add(newProj)
+                projectGrid.insertBefore(createProjContainer(newProj,allProjects),addProjBtn)
+                saveProject(allProjects)
+                closeProjModal()
+                projectError.classList.remove('active')
+            }
         }
     })
 }

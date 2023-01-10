@@ -1,7 +1,7 @@
 import closeTaskModal from './closeTaskModal'
 import createTask from './createTask'
 import createTaskContainer from './createTaskContainer'
-import updateLocal from './updateLocal'
+import saveProject from './saveProject'
 
 function openTaskModal(allProjects,task,elementSpot){
     const taskGrid = document.getElementById('taskGrid')
@@ -106,22 +106,32 @@ function openTaskModal(allProjects,task,elementSpot){
         closeTaskModal()
     })
     confirmBtn.addEventListener('click',(e)=>{
-        let currentTask = createTask(project)
         if(addTaskForm.reportValidity()){
             e.preventDefault()
+            let currentTask = createTask(project.title)
+            if(task){
+                currentTask = createTask(task.project)
+                if(project.title != task.project){
+                    let prevProject = allProjects.getItem(task.project)
+                    prevProject.insert(currentTask, prevProject.taskList.indexOf(task))
+                    saveProject(prevProject)
+                }
+                if(project != allTasksProj){
+                    allTasksProj.insert(currentTask, allTasksProj.taskList.indexOf(task))
+                    saveProject(allTasksProj)
+                }
+            } else {
+                if(project != allTasksProj){
+                    allTasksProj.add(currentTask)
+                    saveProject(allTasksProj)
+                }
+            }
             project.insert(currentTask, Array.prototype.indexOf.call(taskGrid.children, addTaskForm))
             taskGrid.insertBefore(createTaskContainer(currentTask,allProjects), addTaskForm)
+            saveProject(project)
+            saveProject(allProjects)
+            closeTaskModal() 
         }
-        if(project != allTasksProj){
-            if(task){
-                allTasksProj.remove(task)
-            }
-            allTasksProj.add(currentTask)
-        } 
-        if(task && task.project!=project){
-            task.project.insert(createTask(task.project), task.project.taskList.indexOf(task))
-        }
-        closeTaskModal()
     })
     addTaskBtn.classList.add('disabled')
 }
